@@ -1,0 +1,14 @@
+<div class="form-group"
+    [class.has-success]="hasSuccess()"
+    [class.has-danger]="hasError()">
+    <label class="control-label">{{label}} <span *ngIf="isFieldRequired()">*</span></label>
+
+    <ng-content></ng-content>
+
+    <span class="help-block">
+        <span *ngIf="hasError()">
+            <span *ngIf="input.hasError('required')" style="color: #d9534f;">Campo obrigatório</span>
+            <span *ngIf="input.hasError('pattern')">E-mail inválido</span>
+        </span>
+    </span>
+</div>

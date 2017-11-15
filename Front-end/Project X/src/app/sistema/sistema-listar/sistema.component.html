@@ -1,0 +1,96 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Sistemas'" [action]="'Listar'" [icon]="'fa-coffee'"></app-page-header>
+    <div class="card mb-3">
+        <div class="card-header">{{ 'Filtro de Consulta' }}</div>
+        <div class="card-block">
+            <form [formGroup]="sistemaForm" novalidate>
+                <div class="row">
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <input-container label="Descrição" fieldRequired="">
+                                <input type="text" class="form-control" [value]="descricao" (input)="descricao= $event.target.value" formControlName="descricao" maxlength="100" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <input-container label="Sigla" fieldRequired="">
+                                <input type="text" class="form-control" [value]="sigla" (input)="sigla= $event.target.value" formControlName="sigla" maxlength="10" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <input-container label="Email de atendimento do sistema" fieldRequired="">
+                                <input type="text" class="form-control" [value]="emailAtendimento" (input)="emailAtendimento= $event.target.value" formControlName="emailAtendimento" maxlength="100" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="Javascript:void(0)" type="button" class="btn btn-primary" [routerLink]="['/sistema/novo']">
+                            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'Novo Sistema' }}
+                        </a>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-warning" (click)="search()">
+                                <i class="fa fa-search" aria-hidden="true"></i> {{ 'Pesquisar' }}
+                            </button>
+                            <button type="button" class="btn btn-success" (click)="clear()">
+                                <i class="fa fa-eraser" aria-hidden="true"></i> {{ 'Limpar' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-3" *ngIf="results != null">
+        <div class="card-header">{{ 'Resultado da Consulta' }}</div>
+        <div class="card-block">
+            <div class="row">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ 'Descrição' }}</th>
+                                <th>{{ 'Sigla' }}</th>
+                                <th>{{ 'E-mail de atendimento' }}</th>
+                                <th>{{ 'URL' }}</th>
+                                <th>{{ 'Status' }}</th>
+                                <th>{{ 'Ações' }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="results.length == 0">
+                                <td colspan="6" align="center">
+                                    <div class="row">
+                                        <span class="btn-ok">
+                                            Nenhum Sistema foi encontrado. Favor revisar os critérios da sua pesquisa!
+                                        </span>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" (click)="clear()">
+                                        OK
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let r of results1">
+                                <td>{{ r.descricao }}</td>
+                                <td>{{r.sigla}}</td>
+                                <td>{{r.emailAtendimento}}</td>
+                                <td>{{r.url}}</td>
+                                <td>{{r.statusSistemaEnum}}</td>
+                                <td>
+                                    <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="results.length > 50">
+                        <kz-paginacao [qtdPorPagina]="50" [totalRegistros]="results.length" [qtdAdjacentes]="3" (onPaginate)="paginar($event)"></kz-paginacao>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

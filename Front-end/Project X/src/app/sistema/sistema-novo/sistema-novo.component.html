@@ -1,0 +1,54 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Sistemas'" [action]="'Novo'" [icon]="'fa-coffee'"></app-page-header>
+    <div class="card mb-3">
+        <div class="card-header">{{ 'Dados do Sistema' }}</div>
+        <div class="card-block">
+            <form [formGroup]="sistemaForm" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <input-container label="Descrição" fieldRequired="true">
+                                <input type="text" class="form-control" formControlName="descricao" maxlength="100" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <input-container label="Sigla" fieldRequired="true">
+                                <input type="text" class="form-control" formControlName="sigla" maxlength="10" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <input-container label="Email de atendimento do sistema" fieldRequired="">
+                                <input type="text" class="form-control" formControlName="emailAtendimento" maxlength="100" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <input-container label="URL" fieldRequired="">
+                                <input type="text" class="form-control" formControlName="url" maxlength="50" autocomplete="off">
+                            </input-container>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a type="button" class="btn btn-primary" [routerLink]="['/sistema']" [routerLinkActive]="['router-link-active']">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'Voltar' }}
+                        </a>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-success" (click)="save(sistemaForm.value)" [disabled]="!sistemaForm.valid">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> {{ 'Salvar' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

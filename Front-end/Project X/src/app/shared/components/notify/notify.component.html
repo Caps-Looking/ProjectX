@@ -1,0 +1,13 @@
+<ng-template [ngIf]="!isClosed">
+    <div [class]="'notify notify-' + type" role="notify" [ngClass]="classes">
+        <div class="notify-container">
+            <div class="notify-icon">
+                <div class="icon"></div>
+            </div>
+            <div class="notify-details notify-content">
+                <ng-content></ng-content>
+                <a type="button" class="btn btn-success pull-right" (click)="voltar()">OK</a>
+            </div>
+        </div>
+    </div>
+</ng-template>

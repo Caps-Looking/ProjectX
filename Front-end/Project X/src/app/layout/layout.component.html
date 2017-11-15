@@ -1,0 +1,12 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<section class="main-container">
+    <div class="notification" *ngIf="messages.length > 0">
+        <notify *ngFor="let message of messages"
+                [type]="message.type"
+                [dismissOnTimeout]="message.timeout" dismissible="true">
+            {{ message.details }}
+        </notify>
+    </div>
+    <router-outlet></router-outlet>
+</section>

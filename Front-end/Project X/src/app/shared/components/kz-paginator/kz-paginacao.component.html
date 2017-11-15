@@ -1,0 +1,32 @@
+<nav class="text-center">
+    <ul class="pagination">
+        <li *ngIf="pagina!==1" class="page-item">
+            <a href="#" aria-label="Primeiro" class="page-link"
+                (click)="paginar(1, $event)">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li *ngIf="pagina!==1" class="page-item">
+            <a href="#" aria-label="Anterior" class="page-link"
+                (click)="paginar(pagina-1, $event)">
+            <span aria-hidden="true">&lsaquo;</span>
+            </a>
+        </li>
+        <li *ngFor="let i of paginas" class="page-item"
+            [ngClass]="{'active': i===pagina}">
+            <a href="#" (click)="paginar(i, $event)" class="page-link">{{ i }}</a>
+        </li>
+        <li *ngIf="exibirProximo" class="page-item">
+            <a href="#" aria-label="Próximo" class="page-link"
+                (click)="paginar(pagina+1, $event)">
+            <span aria-hidden="true">&rsaquo;</span>
+            </a>
+        </li>
+        <li *ngIf="exibirProximo" class="page-item">
+            <a href="#" aria-label="Último" class="page-link"
+                (click)="paginar(qtdPaginas, $event)">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
